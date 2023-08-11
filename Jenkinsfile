@@ -7,8 +7,10 @@ node {
             sh 'mvn test'
             junit 'target/surefire-reports/*.xml'
         }
-        stage('Deliver') {
-            sh './jenkins/scripts/deliver.sh'
+        stage('Deploy') {
+            sh 'java -jar target/your-app.jar &'  // Menjalankan aplikasi Java (ganti your-app.jar dengan nama file JAR yang sesuai)
+            input message: 'Apakah aplikasi Java sudah berjalan? (Klik "Proceed" untuk melanjutkan)' 
+            sh './jenkins/scripts/kill.sh' 
         }
     }
 }
