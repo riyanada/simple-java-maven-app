@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Get the process ID (PID) of the running application
-PID=$(pgrep -f "java -jar your-app.jar")
+PID=$(pgrep -f "java -jar com.mycompany.app.jar")
 
 if [ -n "$PID" ]; then
     # Send SIGTERM signal to gracefully terminate the application
