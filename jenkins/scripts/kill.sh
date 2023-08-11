@@ -1,7 +1,12 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
-echo 'The following command terminates the "npm start" process using its PID'
-echo '(written to ".pidfile"), all of which were conducted when "deliver.sh"'
-echo 'was executed.'
-set -x
-kill $(cat .pidfile)
+# Get the process ID (PID) of the running application
+PID=$(pgrep -f "java -jar your-app.jar")
+
+if [ -n "$PID" ]; then
+    # Send SIGTERM signal to gracefully terminate the application
+    kill -15 $PID
+    
+    # Wait for the process to exit
+    wait $PID
+fi

@@ -10,9 +10,9 @@ node {
         stage('Deploy') {
             sh './jenkins/scripts/deliver.sh'
             script {
-                sleep 1 // Menjeda eksekusi selama 1 menit
+                sleep 60
             }
             sh './jenkins/scripts/kill.sh'
-    }
+        }
     }
 }
