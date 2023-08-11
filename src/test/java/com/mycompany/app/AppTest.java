@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class AppTest
 {
+    private static final String MY_NAME = "Riyan";
+
     @Test
     public void testAppConstructor() {
         App app1 = new App();
@@ -21,5 +23,11 @@ public class AppTest
     {
         App app = new App();
         assertEquals("Hello World!", app.getMessage());
+    }
+
+    @Test
+    public void testMyName()
+    {
+        assertEquals("Riyan", MY_NAME);
     }
 }
