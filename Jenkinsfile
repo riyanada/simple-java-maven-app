@@ -8,7 +8,7 @@ node {
             junit 'target/surefire-reports/*.xml'
         }
         stage('Deploy') {
-            sh 'java -jar target/your-app.jar &'  // Menjalankan aplikasi Java (ganti your-app.jar dengan nama file JAR yang sesuai)
+            sh './jenkins/scripts/deliver.sh' 
             input message: 'Apakah aplikasi Java sudah berjalan? (Klik "Proceed" untuk melanjutkan)' 
             sh './jenkins/scripts/kill.sh' 
         }
