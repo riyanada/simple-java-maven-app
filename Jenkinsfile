@@ -8,9 +8,11 @@ node {
             junit 'target/surefire-reports/*.xml'
         }
         stage('Deploy') {
-            sh './jenkins/scripts/deliver.sh' 
-            input message: 'Apakah aplikasi Java sudah berjalan? (Klik "Proceed" untuk melanjutkan)' 
-            sh './jenkins/scripts/kill.sh' 
-        }
+            sh './jenkins/scripts/deliver.sh'
+            script {
+                sleep 1 // Menjeda eksekusi selama 1 menit
+            }
+            sh './jenkins/scripts/kill.sh'
+    }
     }
 }
