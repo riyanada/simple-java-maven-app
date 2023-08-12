@@ -7,12 +7,35 @@ node {
             sh 'mvn test'
             junit 'target/surefire-reports/*.xml'
         }
-        stage('Deploy') {
-            sh './jenkins/scripts/deliver.sh'
-            script {
-                sleep 60
+        stage('Manual Approval') {
+            steps {
+                script {
+                    def userInput = input(
+                        id: 'userInput',
+                        message: 'Lanjutkan ke tahap Deploy?',
+                        parameters: [
+                            [$class: 'ChoiceParameterDefinition', 
+                            choices: 'Proceed\nAbort', 
+                            description: 'Pilih salah satu opsi', 
+                            name: 'ACTION']
+                        ]
+                    )
+                    if (userInput == 'Proceed') {
+                        echo 'Melanjutkan ke tahap Deploy...'
+                    } else {
+                        error('Pipeline dihentikan oleh pengguna.')
+                    }
+                }
             }
-            sh './jenkins/scripts/kill.sh'
+        }
+        stage('Deploy') {
+            steps {
+                sh './jenkins/scripts/deliver.sh'
+                script {
+                    sleep 60
+                }
+                sh './jenkins/scripts/kill.sh'
+            }
         }
     }
 }
