@@ -1,12 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# Get the process ID (PID) of the running application
-PID=$(pgrep -f "java -jar com.mycompany.app.jar")
+JAVA_PID=$(pgrep -f "java -cp target/classes com.mycompany.app.App")
 
-if [ -n "$PID" ]; then
-    # Send SIGTERM signal to gracefully terminate the application
-    kill -15 $PID
-    
-    # Wait for the process to exit
-    wait $PID
+if [ -n "$JAVA_PID" ]; then
+  echo "Killing Java process with PID $JAVA_PID"
+  kill $JAVA_PID
+else
+  echo "Java process not found"
 fi
