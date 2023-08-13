@@ -28,7 +28,7 @@ node {
                 sh './jenkins/scripts/deliver.sh'
                 sh 'java -cp target/classes com.mycompany.app.App'
                 sleep 60
-                bash './jenkins/scripts/kill.sh'
+                sh './jenkins/scripts/kill.sh'
             } else {
                 error('Pipeline dihentikan oleh pengguna.')
             }
