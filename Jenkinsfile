@@ -29,6 +29,8 @@ node {
                 echo 'Melanjutkan ke tahap Deploy...'
             } else {
                 error('Pipeline dihentikan oleh pengguna.')
+                sh "chmod +x -R ${env.WORKSPACE}"
+                sh './jenkins/scripts/kill.sh'
             }
         }
         
