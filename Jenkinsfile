@@ -28,6 +28,8 @@ node {
                 sh './jenkins/scripts/deliver.sh'
                 sh 'java -cp target/classes com.mycompany.app.App'
                 sleep 60
+                
+                sh "chmod +x -R ${env.WORKSPACE}"
                 sh './jenkins/scripts/kill.sh'
             } else {
                 error('Pipeline dihentikan oleh pengguna.')
