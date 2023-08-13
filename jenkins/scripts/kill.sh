@@ -1,10 +1,10 @@
 #!/bin/bash
 
-JAVA_PID=$(pgrep -f "java -cp target/classes com.mycompany.app.App")
+pid=$(ps aux | grep '[j]ava -cp target/classes com.mycompany.app.App' | awk '{print $2}')
 
-if [ -n "$JAVA_PID" ]; then
-  echo "Killing Java process with PID $JAVA_PID"
-  kill $JAVA_PID
+if [ -n "$pid" ]; then
+  echo "Killing Java process with PID $pid"
+  kill "$pid"
 else
   echo "Java process not found"
 fi
