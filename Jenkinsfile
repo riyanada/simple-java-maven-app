@@ -13,7 +13,6 @@ node {
         }
 
         stage('Manual Approval') {
-            
             def userInput = input(
                 id: 'userInput',
                 message: 'Lanjutkan ke tahap Deploy?',
