@@ -1,10 +1,11 @@
 #!/bin/bash
 
-pid=$(ps aux | grep '[j]ava -cp target/classes com.mycompany.app.App' | awk '{print $2}')
+PID=$(pgrep -f "java -jar com.mycompany.app.jar")
 
-if [ -n "$pid" ]; then
-  echo "Killing Java process with PID $pid"
-  kill "$pid"
-else
-  echo "Java process not found"
+if [ -n "$PID" ]; then
+    # Send SIGTERM signal to gracefully terminate the application
+    kill -15 $PID
+    
+    # Wait for the process to exit
+    wait $PID
 fi
